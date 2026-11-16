@@ -1,4 +1,4 @@
-// Token Radar — radar-2 entry (Node 22, standard library only).
+// Token Radar — radar-3 entry (Node 22, standard library only).
 //
 // Reads the sealed snapshot, scores every rankable pre-token protocol with
 // the model in lib/model.ts, and writes the ranked board, the dashboard's
@@ -102,5 +102,6 @@ writeFileSync(
 
 process.stdout.write(
   `token radar: ${snapshot.protocols.length} protocols, ${snapshot.watchlist.length} on the watchlist, ${board.length} rows scored (${radar.early_size} early, ${radar.live_size} live set aside)\n` +
+    `token radar: curve log10(mcap) = ${radar.curve.intercept} + ${radar.curve.slope} x log10(tvl) on ${radar.curve.n_comps} comps; LOO miss x${radar.curve.backtest.loo_miss} vs flat x${radar.curve.backtest.loo_flat_miss}; verdicts ${JSON.stringify(radar.verdict_counts)}\n` +
     `token radar: wrote ${join(out, 'board.json')}, ${join(out, 'data.js')}, ${join(out, 'dashboard')} (${dashFiles.length} files), ${join(out, 'screenshots')} (${shots.length} images) and ${join(out, 'dossier.json')}\n`,
 );
